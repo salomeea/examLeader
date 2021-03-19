@@ -1,0 +1,23 @@
+#search{
+
+    outline: none;
+    width:200px;
+    padding:5px;
+    /* margin-right: 25px; */
+    font-size: 15px;
+    color:white;
+    background-color: transparent;
+    border: 1px solid tomato;
+    border-radius: 10px;
+
+}
+
+#btns{
+    width:50px;
+    padding:5px;
+    font-size: 13px;
+    background-color: tomato;
+    border:none
+    
+}
+
