@@ -1,4 +1,7 @@
-import firebase from 'firebase'
+
+import firebase from 'firebase/app';
+require('firebase/auth');
+
 var firebaseConfig = {
     apiKey: "AIzaSyBbW5dNIyN6_SyQqPlmiNdZusKe2pdXt70",
     authDomain: "examleader-583b2.firebaseapp.com",

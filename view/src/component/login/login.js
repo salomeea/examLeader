@@ -5,7 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { setName, setLastName, setEmail, setPassword, setId,setToken } from '../actions/myAction'
 import './login.css'
-//import fire from '../fire'
+import fire from '../fire'
 function mapStateToProps(state) //appel o store et rend le state de user
 {
   return {
@@ -29,26 +29,36 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Login(props
 
   const mySubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/login', {
-      email: user.email,
-      password: user.password
-    }).then((response) => {
-      console.log(response)
-     // console.log(response.data.token)
-     setToken(response.data.token)
 
-      setName(response.data.user[0].name)
-      setLastName(response.data.user[0].lastName);
-       console.log(response.data.user[0]._id)
-      setId(response.data.user[0]._id)
+fire.auth().signInWithEmailAndPassword(user.email,user.password)
+.then((u)=>{
+  console.log('logged in')
+  axios.post('http://localhost:3000/login', {
+    email: user.email,
+    password: user.password
+  }).then((response) => {
+    console.log(response)
+   // console.log(response.data.token)
+   setToken(response.data.token)
+
+    setName(response.data.user[0].name)
+    setLastName(response.data.user[0].lastName);
+     console.log(response.data.user[0]._id)
+    setId(response.data.user[0]._id)
 
 
-      history.push("/myList");
+    history.push("/myList");
 
 
-    }, (error) => {
-      console.log(error);
-    })
+  }, (error) => {
+    console.log(error);
+  })
+})
+.catch((err)=>{
+  console.log('err fire'+ err)
+})
+
+   
   }
 
  

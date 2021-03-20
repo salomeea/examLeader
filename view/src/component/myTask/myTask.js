@@ -168,16 +168,19 @@ useEffect(getall,[user._id,token.id])
 
     const updateTodo = (title, _id, completed) => {
         const newTodo = todo.map(item => (item._id === _id) ? { title, _id, completed } : item) //si c egale
-        console.log(newTodo)
         setTodo(newTodo)
         setEditTodo("")
         console.log(title,_id,completed)
         const hlp= todo.map(item => (item._id === _id) ?  item.title : '')
+        const tmp = hlp.filter(function(item) {
+            return item !== ''
+        })
+        console.log(tmp)
         console.log(hlp)
         axios.post('http://localhost:3000/updateTask', {
                 title: title,
                 completed: false,
-                hlp:hlp[0]
+                hlp:tmp[0]
             },{
                 headers: {
                   'authorization': `${token.id}` 
@@ -196,6 +199,7 @@ useEffect(getall,[user._id,token.id])
         const findTodo = todo.find(x => x._id === _id)
         console.log(findTodo)
         setEditTodo(findTodo)
+
     }
 
 

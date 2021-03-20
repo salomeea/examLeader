@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import React, { Component } from "react";
 import './showAll.css'
 import { Link } from 'react-router-dom';
+import fire from '../fire';
 function mapStateToProps(state) {
     return {
         user: state.user,
@@ -18,6 +19,8 @@ export default connect(mapStateToProps)(class ShowAll extends Component {
         }
     }
   
+
+  
     componentDidMount(){
         axios.get(`http://localhost:3000/getAllUserTasks/${this.props.user._id}`,{
             headers: {
@@ -30,6 +33,13 @@ export default connect(mapStateToProps)(class ShowAll extends Component {
               console.log(this.state.list)
              }
     )}
+
+    logout(){
+       
+     
+        fire.auth().signOut();
+
+    }
     render() {
         return (
 
@@ -50,6 +60,7 @@ export default connect(mapStateToProps)(class ShowAll extends Component {
                 </li>
                 
             ))} <Link to='/myList'>go back</Link>
+                <Link to='/login' onClick={this.logout} className='log'>Log-out</Link>
 
                         </div>
                     </div>

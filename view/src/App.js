@@ -8,7 +8,9 @@ import {Provider} from 'react-redux'
 import store from './component/store/store'
 import ShowAll from './component/showAll/showAll'
 
+
 function App() {
+
 
 
   return (

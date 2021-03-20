@@ -5,6 +5,7 @@ import {setName,setLastName,setEmail,setPassword} from '../actions/myAction'
 import {connect} from 'react-redux'
 import './signIn.css'
 import { Link, useHistory } from 'react-router-dom'
+import fire from '../fire'
 
 function mapStateToProps(state) //appel o store et rend le state de user
 {
@@ -29,7 +30,9 @@ export default connect (mapStateToProps,mapDispatchToProps)(function SignIn(prop
     const history=useHistory()
     const mySubmit=(e)=>{
     e.preventDefault();
-      
+    fire.auth().createUserWithEmailAndPassword(user.email,user.password)
+    .then((u)=>{
+      console.log('fire signed up')
       axios.post('http://localhost:3000/addUser', {
         name:user.name,
         lastName:user.lastName,
@@ -41,6 +44,11 @@ export default connect (mapStateToProps,mapDispatchToProps)(function SignIn(prop
         console.log(error);
       })
       history.push("/")
+    })
+    .catch((err)=>{
+      console.log('err fire gign up'+ err)
+    })
+      
   }
 
     return (
